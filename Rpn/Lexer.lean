@@ -22,18 +22,11 @@ instance : ToString Token where
   | .div => "/"
   | .int i => toString i
 
-
 private def digitsToInt (digits : List { c : Char // c.isDigit }) : Int :=
   let powersOfTen : List Int := (List.range digits.length).map (( 10 : Int ).pow ·)
   let digits : List Int := (digits.reverse.map (fun c => c.val.val - '0'.val)).map (fun i => i.toNat)
   ((digits.zip powersOfTen).map (fun ⟨ l, r ⟩ => l * r)).sum
 
-
-/- theorem List.dropWhile_lt { α : Type u } (as : List α) (p : α -> Bool) : (as.dropWhile p).length <= as.length := by -/
-/-   refine Sublist.length_le ?_ -/
-/-   exact dropWhile_sublist p -/
-
-        
 private def lexImpl (input : List Char) : List Token :=
   match input with
   | [] => []
